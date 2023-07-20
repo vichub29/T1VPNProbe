@@ -1,4 +1,14 @@
-<
+<#
+
+Description: This script tests whether the VPN tunnel endpoints are available, and triggers the VPN static route changes to suppport T1 VPN failover as required.
+
+Author: Victor Miller (victor.miller@cybercx.co.nz)
+Date: 20 July 2023
+Version: v0.1
+
+Version history:
+v0.1 Initial draft for testing.
+#>
 
 ##############
 ### Probes ###
