@@ -14,12 +14,8 @@ v0.1 Initial draft for testing.
 ### Probes ###
 ##############
 
-
-$primaryendpoint = '10.45.115.16'
-#$primaryendpoint = '10.45.115.99'
-
-$secondaryendpoint = '10.45.115.18'
-#$secondaryendpoint = '10.45.115.99'
+$primaryendpoint = '10.3.0.103'
+$secondaryendpoint = '10.3.0.101'
 
 #################
 ### Variables ###
@@ -55,6 +51,7 @@ ElseIf ($previousprimarystatus -eq $True -and $primarytest -eq $False -and $seco
 $result = "Primary site has failed. Failover!"
 # Call python script to set routes to SECONDARY
 Write-Host $result
+python.exe sddc_import_export.py -o route-secondary
 }
 
 ElseIf ($previousprimarystatus -eq $False -and $primarytest -eq $False -and $secondarytest -eq $True -and $previoussecondarystatus -eq $True){
@@ -67,14 +64,15 @@ ElseIf ($previousprimarystatus -eq $False -and $primarytest -eq $True){
 $result = "Primary site restored. Failback!"
 # Call python script to set routes to PRIMARY
 Write-Host $result
+python.exe sddc_import_export.py -o route-primary
 }
 
 ElseIf ($previousprimarystatus -eq $False -and $primarytest -eq $False -and $previoussecondarystatus -eq $False -and $secondarytest -eq $True ){
 $result = "Secondary restored following full failure!"
 # Call python script to set routes to SECONDARY
 Write-Host $result
+python.exe sddc_import_export.py -o route-secondary
 }
-
 
 Else {
 $result = "Everything down!"
